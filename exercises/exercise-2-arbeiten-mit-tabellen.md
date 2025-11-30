@@ -20,7 +20,7 @@ Bevor Sie Tabellen anlegen, erstellen Sie eine neue Datenbank namens psqltrainin
 
 1. Erstellen Sie die Datenbank psqltraining.
 
-2. Verbinden Sie sich anschließend mit dieser Datenbank über psql.
+2. Verbinden Sie sich anschließend mit dieser Datenbank über psql oder nutzen Sie das browserbasierte Verwaltungstool pgAdmin  .
 
 3. Prüfen Sie, ob die Datenbank korrekt angelegt wurde.
 

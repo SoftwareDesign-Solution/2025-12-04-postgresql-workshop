@@ -1,19 +1,26 @@
 - [1. Installation von PostgreSQL](#1-installation-von-postgresql)
-  - [1.1 Installation von PostgreSQL](#11-installation-von-postgresql)
-  - [1.2 Installation mit Docker](#12-installation-mit-docker)
-  - [1.3 Installation pgAdmin](#13-installation-pgadmin)
+  - [1.1 PostgreSQL lokal installieren (Standalone)](#11-postgresql-lokal-installieren-standalone)
+  - [1.2 PostgreSQL und pgAdmin via Docker installieren (docker-compose)](#12-postgresql-und-pgadmin-via-docker-installieren-docker-compose)
+  - [1.3 pgAdmin lokal installieren (Alternative zur Docker-Variante)](#13-pgadmin-lokal-installieren-alternative-zur-docker-variante)
 
 Bearbeitungszeit: 30 Minuten
 
 # 1. Installation von PostgreSQL
 
-In dieser Aufgabe installieren Sie PostgreSQL in drei unterschiedlichen Varianten, um verschiedene Szenarien kennenzulernen.
+In dieser Aufgabe installieren Sie PostgreSQL auf zwei möglichen Wegen:
+
+1. Standalone-Installation (Windows, Linux, macOS)
+2. Docker-Installation mittels der bereitgestellten Datei
+`psqltraining-docker.yml`, die PostgreSQL und pgAdmin gemeinsam startet.
+
+Anschließend installieren Sie pgAdmin (entweder lokal oder im Docker-Container).
+
 Ziel ist es, dass Sie am Ende eine funktionierende PostgreSQL-Instanz besitzen und sich erfolgreich damit verbinden können.
 
-## 1.1 Installation von PostgreSQL
+## 1.1 PostgreSQL lokal installieren (Standalone)
 
-Installieren Sie den PostgreSQL-Server lokal auf Ihrem Betriebssystem (Windows, Linux oder macOS).
-Nach der Installation sollen Sie überprüfen, ob der Dienst läuft und ob Sie sich erfolgreich über die Kommandozeile verbinden können.
+Installieren Sie PostgreSQL auf Ihrem Betriebssystem.
+Prüfen Sie anschließend, ob der Dienst läuft und ob Sie sich erfolgreich verbinden können.
 
 ### Installation unter Windows (Beispiel)
 
@@ -50,99 +57,123 @@ brew services start postgresql
 psql postgres
 ```
 
-<details>
-<summary>Show solution</summary>
-<p>
+## 1.2 PostgreSQL und pgAdmin via Docker installieren (docker-compose)
 
-**/**
+Mit der Datei psqltraining-docker.yml können Sie PostgreSQL und pgAdmin gemeinsam starten.
+Diese Datei ist im Schulungsrepository enthalten.
 
+1. docker-compose starten
+2. prüfen, ob beide Container laufen
+3. pgAdmin im Browser <https://localhost:5050/> öffnen
+4. Verbindung zum PostgreSQL-Datenbankserver einrichten
+
+### Inhalt der Datei `psqltraining-docker.yml`
+
+```yaml
+services:
+  postgres:
+    image: postgres:latest
+    container_name: psqltraining
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - pgnet
+    restart: unless-stopped
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    networks:
+      - pgnet
+    restart: unless-stopped
+
+networks:
+  pgnet:
+    driver: bridge
 ```
-```
 
-</p>
-</details>
-
-## 1.2 Installation mit Docker
-
-Installieren und starten Sie PostgreSQL über Docker.
-Ziel ist es, dass Sie einen Container starten und per psql darauf zugreifen.
-
-<details>
-<summary>Show solution</summary>
-<p>
-
-**Docker-Installation der PostgreSQL-Datenbank:**
-
-Container starten (Standard-Port 5432):
+### 1. docker-compose starten
 
 ```bash
-docker run --name psqlworkshop \
- -e POSTGRES_PASSWORD=postgres \
- -p 5432:5432 \
- -d postgres:17
+docker compose -f psqltraining-docker.yml up -d
 ```
 
-Status prüfen:
+### 2. Containerstatus prüfen
 
 ```bash
 docker ps
 ```
 
-Mit `psql` verbinden:
+Es sollten laufen:
+
+- postgres
+- dpage/pgadmin4
+
+### 3. pgAdmin aufrufen
+
+Im Browser:
 
 ```bash
-psql -h localhost -U postgres
+https://localhost:5050/
 ```
 
-Container stoppen:
+### 4. Login-Daten
 
-```bash
-docker stop pg-training
-```
+- E-Mail: admin@example.com
+- Passwort: admin
 
-Container löschen:
+### 5. Neuen Server in pgAdmin registrieren
 
-```bash
-docker rm pg-training
-```
+**Register → New Server**
 
-</p>
-</details>
+**General**
 
-## 1.3 Installation pgAdmin
+- Name: psqltraining
 
-Installieren Sie pgAdmin als GUI-Tool, richten Sie den Zugriff auf Ihren zuvor installierten PostgreSQL-Server ein und testen Sie eine Verbindung.
+**Connection**
 
-### pgAdmin Installation (Beispiel Windows)
+- Host: postgres
+  
+  (Service-Name aus der docker-compose-Datei)
+- Port: 5432
 
-1. Installer von <https://www.pgadmin.org/download/>  herunterladen
+- Username: postgres
 
-2. Programm starten
+- Password: postgres
 
-3. „Register new Server“ auswählen
+- Database: psqltraining
 
-4. Verbindung eintragen:
+Speichern → Verbindung erfolgreich
 
-    - Host: localhost
-    - Username: postgres
-    - Password: (Postgres-Passwort)
+## 1.3 pgAdmin lokal installieren (Alternative zur Docker-Variante)
 
-5. Verbindung testen → Sollte erfolgreich sein.
+Falls Sie pgAdmin nicht über Docker nutzen möchten, können Sie es auch lokal installieren.
 
-### pgAdmin in Docker (Alternative)
+1. Installer von <https://www.pgadmin.org/download/> herunterladen
+2. pgAdmin installieren
+3. Verbindung zum PostgreSQL-Server anlegen
 
-<details>
-<summary>Show solution</summary>
-<p>
+**pgAdmin starten → Register → New Server**
 
-**pgAdmin in Docker (Alternative):**
+**General**
 
-```bash
-docker run -p 5050:80 \
- -e PGADMIN_DEFAULT_EMAIL=admin@example.com \
- -e PGADMIN_DEFAULT_PASSWORD=admin \
- -d dpage/pgadmin4
-```
+- Name: psqltraining
 
-</p>
-</details>
+**Connection**
+
+- Host: localhost
+
+- Port: 5432
+
+- Username: postgres
+
+- Password: postgres
