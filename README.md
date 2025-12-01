@@ -54,7 +54,7 @@ Die Präsentation befindet sich im Ordner `slides`:
 
 Für die Übungen benötigst du:
 
-- PostgreSQL (empfohlen: Version 14 oder höher)
+- PostgreSQL (empfohlen: Version 18 oder höher)
 - pgAdmin oder ein anderes SQL-Tool  
 - Optional: Docker für schnelle Testumgebungen
 
