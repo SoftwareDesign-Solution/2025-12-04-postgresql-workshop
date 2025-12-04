@@ -89,6 +89,13 @@ Erstellen Sie eine Abfrage, die folgende Informationen ausgibt:
 
 Verwenden Sie dafür einen INNER JOIN zwischen orders und customers.
 
+**Erwartetes Ergebnis**
+
+| order_id | order_date | customer |
+| -------- | ---------- | -------- |
+| 1 | 2025-01-10 | Alice GmbH |
+| 2 | 2025-01-10 | Bob OHG |
+
 <details>
 <summary>Show solution</summary>
 <p>
@@ -105,13 +112,6 @@ INNER JOIN customers c
   ON o.customer_id = c.id;
 ```
 
-**Erwartetes Ergebnis**
-
-| order_id | order_date | customer |
-| -------- | ---------- | -------- |
-| 1 | 2025-01-10 | Alice GmbH |
-| 2 | 2025-01-10 | Bob OHG |
-
 </p>
 </details>
 
@@ -127,6 +127,14 @@ Erstellen Sie eine Abfrage, die die Positionen jeder Bestellung anzeigt:
 Gesamtpreis pro Position (Menge × Preis)
 
 Binden Sie dazu die Tabellen orders, order_items und products mit JOINs ein.
+
+**Erwartetes Ergebnis**
+
+| order_id | product | quantity | price | total_position |
+| -------- | ------- | -------: | ----: | -------------: |
+| 1	| Monitor |	1 |	149.90 |	149.90 |
+| 1	| Tastatur |	2 |	29.90 |	59.80 |
+| 2	| Laptop |	1 |	999.00	| 999.00 |
 
 <details>
 <summary>Show solution</summary>
@@ -146,14 +154,6 @@ JOIN order_items oi ON o.id = oi.order_id
 JOIN products p     ON oi.product_id = p.id;
 ```
 
-**Erwartetes Ergebnis**
-
-| order_id | product | quantity | price | total_position |
-| -------- | ------- | -------: | ----: | -------------: |
-| 1	| Monitor |	1 |	149.90 |	149.90 |
-| 1	| Tastatur |	2 |	29.90 |	59.80 |
-| 2	| Laptop |	1 |	999.00	| 999.00 |
-
 </p>
 </details>
 
@@ -167,6 +167,13 @@ Geben Sie aus:
 - Anzahl der Bestellungen
 
 Hinweis: Verwenden Sie LEFT JOIN und COUNT um die Anzahl der Bestellungen zu ermitteln.
+
+**Erwartetes Ergebnis**
+
+| id | name | order_count |
+| -- | ---- | ----------: |
+| 1 | Alice GmbH | 1 |
+| 2 | Bob OHG | 1 |
 
 <details>
 <summary>Show solution</summary>
@@ -185,13 +192,6 @@ LEFT JOIN orders o
 GROUP BY c.id, c.name
 ORDER BY c.name;
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | order_count |
-| -- | ---- | ----------: |
-| 1 | Alice GmbH | 1 |
-| 2 | Bob OHG | 1 |
 
 </p>
 </details>

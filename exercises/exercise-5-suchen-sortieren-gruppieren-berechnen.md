@@ -17,8 +17,34 @@ Verwenden Sie dafür die bereits angelegten Tabellen **products**, **customers**
 Erstellen Sie die folgenden Abfragen für die Tabelle products:
 
 1. Alle Produkte aufsteigend nach Name sortiert.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 | allgemein |
+    | 1	| Monitor |	175.89	| 2025-11-28 18:16:31.480651 | allgemein |
+    | 2	| Tastatur |	35.49	| 2025-11-28 18:16:31.480651 | allgemein |
+
 2. Alle Produkte absteigend nach Preis sortiert.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 | allgemein |
+    | 1	| Monitor |	175.89	| 2025-11-28 18:16:31.480651 | allgemein |
+    | 2	| Tastatur |	35.49	| 2025-11-28 18:16:31.480651 | allgemein |
+
 3. Alle Produkte zuerst nach category (aufsteigend) und innerhalb der Kategorie nach price (absteigend) sortiert.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 | allgemein |
+    | 1	| Monitor |	175.89	| 2025-11-28 18:16:31.480651 | allgemein |
+    | 2	| Tastatur |	39.49	| 2025-11-28 18:16:31.480651 | allgemein |
 
 <details>
 <summary>Show solution</summary>
@@ -86,8 +112,28 @@ ORDER BY category ASC, price DESC;
 Erstellen Sie folgende Abfragen:
 
 1. Finden Sie alle Produkte, deren Name mit dem Buchstaben „M“ beginnt.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at |
+    | -- | ---- | ----: | ---------- |
+    | 1	| Monitor |	175.49	| 2025-11-28 18:16:31.480651 |
+
 2. Finden Sie alle Produkte, deren Name die Zeichenkette „top“ enthält (z. B. „Laptop“).
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at |
+    | -- | ---- | ----: | ---------- |
+    | 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 |
+  
 3. Finden Sie alle Produkte, deren Name „monitor“ enthält – unabhängig von Groß-/Kleinschreibung.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at |
+    | -- | ---- | ----: | ---------- |
+    | 1	| Monitor |	175.89	| 2025-11-28 18:16:31.480651 |
 
 <details>
 <summary>Show solution</summary>

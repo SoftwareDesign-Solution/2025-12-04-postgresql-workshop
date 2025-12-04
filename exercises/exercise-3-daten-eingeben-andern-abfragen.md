@@ -54,18 +54,58 @@ Erstellen Sie die folgenden SELECT-Abfragen:
 1. Alle Produkte anzeigen
     - Wählen Sie alle Spalten aus der Tabelle products.
 
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 2 | Tastatur | 35,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 3 | Maus | 19,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
+
 2. Produkte nach Preis sortieren
     - Sortieren Sie absteigend nach Preis.
 
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 2 | Tastatur | 35,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 3 | Maus | 19,90 | 2025-11-28 18:16:31.480651 | allgemein |
+
 3. Produkte über 100 Euro filtern
     - Zeigen Sie nur Produkte mit Preis über 100 € an.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
 
 4. Bestimmte Spalten auswählen
     - Geben Sie nur name und price aus.
     - Verwenden Sie Aliase für bessere Lesbarkeit.
 
+    **Erwartetes Ergebnis**
+
+    | produktname | preis_eur |
+    | ----------- | --------: |
+    | Monitor | 149,90 |
+    | Tastatur | 35,90 |
+    | Maus | 19,90 |
+    | Laptop | 999,00 |
+
 5. Kunden nach Stadt filtern
     - Zeigen Sie alle Kunden aus der Stadt „Berlin“.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | city | created_at |
+    | -- | ---- | ---- | ---------- |
+    | 1 | Alice GmbH | Berlin | 2025-11-28 19:07:54.266568 |
 
 <details>
 <summary>Show solution</summary>
@@ -168,7 +208,26 @@ WHERE city = 'Berlin';
 Ändern Sie in der Tabelle products:
 
 1. Den Preis des Produkts Monitor auf 159.90.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 2 | Tastatur | 35,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 3 | Maus | 159,90 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
+
 2. Erhöhen Sie alle Preise um 10 %.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 3 | Maus | 21,89 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
 
 Überprüfen Sie das Ergebnis mit der Abfrage aller Produkte
 
@@ -225,7 +284,24 @@ SELECT * FROM products;
 Löschen Sie in der Tabelle products:
 
 1. Das Produkt Maus.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
+
 2. Alle Produkte, deren Preis unter 35 Euro liegt.
+
+    **Erwartetes Ergebnis**
+
+    | id | name | price | created_at | category |
+    | -- | ---- | ----: | ---------- | -------- |
+    | 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 2 | Tastatur | 35,49 | 2025-11-28 18:16:31.480651 | allgemein |
+    | 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
 
 Überprüfen Sie das Ergebnis mit der Abfrage aller Produkte
 
@@ -249,7 +325,7 @@ SELECT * FROM products;
 | id | name | price | created_at | category |
 | -- | ---- | ----: | ---------- | -------- |
 | 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 35,49 | 2025-11-28 18:16:31.480651 | allgemein |
+| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
 | 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
 
 **2. Alle Produkte unter 30 € entfernen**
@@ -268,7 +344,7 @@ SELECT * FROM products;
 | id | name | price | created_at | category |
 | -- | ---- | ----: | ---------- | -------- |
 | 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 35,49 | 2025-11-28 18:16:31.480651 | allgemein |
+| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
 | 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
 
 </p>
@@ -279,6 +355,13 @@ SELECT * FROM products;
 Erstellen Sie eine SELECT-Abfrage, die nur Produkte zeigt, deren Name mit „T“ beginnt oder deren Preis unter 50 € liegt.
 
 Sortieren Sie das Ergebnis alphabetisch nach Produktname.
+
+**Erwartetes Ergebnis**
+
+| id | name | price | created_at | category |
+| -- | ---- | ----: | ---------- | -------- |
+| 3 | Maus | 19,90 | 2025-11-28 18:16:31.480651 | allgemein |
+| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
 
 <details>
 <summary>Show solution</summary>
@@ -299,7 +382,7 @@ ORDER BY name;
 | id | name | price | created_at | category |
 | -- | ---- | ----: | ---------- | -------- |
 | 3 | Maus | 19,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 35,49 | 2025-11-28 18:16:31.480651 | allgemein |
+| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
 
 </p>
 </details>
