@@ -55,9 +55,27 @@ Führen Sie folgende Typkonvertierungen durch:
 
 1. Konvertieren Sie eine Textzahl '42' in einen Integer.
 
+    **Erwartetes Ergebnis**
+
+    | int4 |
+    | ---: |
+    | 42 |
+
 2. Konvertieren Sie das Datum '2025-01-01' in einen TIMESTAMP.
 
+    **Erwartetes Ergebnis**
+
+    | timestamp |
+    | --------- |
+    | 2025-01-01 00:00:00 |
+
 3. Konvertieren Sie die Zahl 123.45 in TEXT.
+
+    **Erwartetes Ergebnis**
+
+    | text |
+    | ---- |
+    | 123.45 |
 
 <details>
 <summary>Show solution</summary>
@@ -71,12 +89,6 @@ Führen Sie folgende Typkonvertierungen durch:
 SELECT '42'::INT;
 ```
 
-**Erwartetes Ergebnis**
-
-| int4 |
-| ---: |
-| 42 |
-
 Bild
 
 ### 2. Datum '2025-01-01' in einen TIMESTAMP
@@ -87,12 +99,6 @@ Bild
 SELECT '2025-01-01'::TIMESTAMP;
 ```
 
-**Erwartetes Ergebnis**
-
-| timestamp |
-| --------- |
-| 2025-01-01 00:00:00 |
-
 ### 3. Zahl 123.45 in TEXT
 
 **SQL-Befehl**
@@ -100,12 +106,6 @@ SELECT '2025-01-01'::TIMESTAMP;
 ```postgresql
 SELECT 123.45::TEXT;
 ```
-
-**Erwartetes Ergebnis**
-
-| text |
-| ---- |
-| 123.45 |
 
 </p>
 </details>
@@ -155,9 +155,29 @@ Lesen Sie aus der Tabelle product_attributes:
 
 1. Die resolution aller Produkte aus.
 
+    **Erwartetes Ergebnis**
+
+    | product_id | resolution |
+    | ---------: | ---------- |
+    | 1 | 1920x1080 |
+    | 2 | [null] |
+
 2. Alle Attribute als formatierten JSON-Text.
 
+    **Erwartetes Ergebnis**
+
+    | product_id | json_text |
+    | ---------: | --------- |
+    | 5	| {"size_inch": 24, "resolution": "1920x1080"} |
+    | 6	| {"wired": true, "layout": "DE"} |
+
 3. Nur jene Zeilen, bei denen das Attribut "wired": true gesetzt ist.
+
+    **Erwartetes Ergebnis**
+
+    | id | product_id | attributes |
+    | -: | ---------: | ---------- |
+    | 2 | 2 | {"wired": true, "layout": "DE"} |
 
 <details>
 <summary>Show solution</summary>
@@ -174,13 +194,6 @@ SELECT
 FROM product_attributes;
 ```
 
-**Erwartetes Ergebnis**
-
-| product_id | resolution |
-| ---------: | ---------- |
-| 1 | 1920x1080 |
-| 2 | [null] |
-
 ### 2. JSON formatiert anzeigen
 
 **SQL-Abfrage**
@@ -192,13 +205,6 @@ SELECT
 FROM product_attributes;
 ```
 
-**Erwartetes Ergebnis**
-
-| product_id | json_text |
-| ---------: | --------- |
-| 5	| {"size_inch": 24, "resolution": "1920x1080"} |
-| 6	| {"wired": true, "layout": "DE"} |
-
 ### 3. Alle Produkte, bei denen wired = true
 
 **SQL-Abfrage**
@@ -208,12 +214,6 @@ SELECT *
 FROM product_attributes
 WHERE attributes->>'wired' = 'true';
 ```
-
-**Erwartetes Ergebnis**
-
-| id | product_id | attributes |
-| -: | ---------: | ---------- |
-| 2 | 2 | {"wired": true, "layout": "DE"} |
 
 </p>
 </details>
@@ -231,6 +231,12 @@ Fügen Sie zwei Datensätze ein:
 - '{"small", "medium"}''
 
 Selektieren Sie anschließend alle Zeilen, bei denen das Array das Element 'blue' enthält.
+
+**Erwartetes Ergebnis**
+
+| id | tags |
+| -: | ---- |
+| 1 | {red,blue,green} |
 
 <details>
 <summary>Show solution</summary>
@@ -262,12 +268,6 @@ FROM tags_demo
 WHERE 'blue' = ANY(tags);
 ```
 
-**Erwartetes Ergebnis**
-
-| id | tags |
-| -: | ---- |
-| 1 | {red,blue,green} |
-
 </p>
 </details>
 
@@ -288,6 +288,12 @@ Erstellen Sie anschließend eine Tabelle customer_addresses mit:
 Fügen Sie mindestens einen Datensatz ein.
 
 Überprüfen Sie das Ergebnis, in dem Sie den Kunden inkl. Adresse in getrennten Spalten ausgeben
+
+**Erwartetes Ergebnis**
+
+| id | name | street | zipcode | city |
+| -: | ---- | ------ | ------- | ---- |
+| 1 | Alice GmbH | Musterstraße 1 | 10115 | Berlin |
 
 <details>
 <summary>Show solution</summary>
@@ -332,12 +338,6 @@ SELECT
  JOIN customer_addresses ca
    ON c.id = ca.customer_id
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | street | zipcode | city |
-| -: | ---- | ------ | ------- | ---- |
-| 1 | Alice GmbH | Musterstraße 1 | 10115 | Berlin |
 
 </p>
 </details>

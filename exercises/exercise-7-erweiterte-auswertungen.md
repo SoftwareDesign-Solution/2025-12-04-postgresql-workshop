@@ -20,6 +20,12 @@ Verwenden Sie dafür die Tabellen products, customers, orders und order_items.
 
 Erstellen Sie eine Abfrage, die alle Produkte anzeigt, deren Preis über dem Durchschnittspreis aller Produkte liegt.
 
+**Erwartetes Ergebnis**
+
+| id | name | price | created_at | category |
+| -: | ---- | ----: | ---------- | -------- |
+| 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
+
 <details>
 <summary>Show solution</summary>
 <p>
@@ -32,12 +38,6 @@ FROM products
 WHERE price > (SELECT AVG(price) FROM products);
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -: | ---- | ----: | ---------- | -------- |
-| 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
-
 </p>
 </details>
 
@@ -49,6 +49,14 @@ Ermitteln Sie für jedes Produkt die Summe aller verkauften Mengen aus der Tabel
 - Gesamtverkaufte Menge
 
 Verwenden Sie dazu eine korrelierte Subquery.
+
+**Erwartetes Ergebnis**
+
+| name | total_quantity |
+| ---- | -------------: |
+| Tastatur | 2 |
+| Laptop | 1 |
+| Monitor | 4 |
 
 <details>
 <summary>Show solution</summary>
@@ -65,14 +73,6 @@ SELECT
 FROM products p;
 ```
 
-**Erwartetes Ergebnis**
-
-| name | total_quantity |
-| ---- | -------------: |
-| Tastatur | 2 |
-| Laptop | 1 |
-| Monitor | 4 |
-
 </p>
 </details>
 
@@ -84,6 +84,14 @@ Geben Sie aus:
 - Laufende Nummer (ROW_NUMBER())
 - Produktname
 - Preis
+
+**Erwartetes Ergebnis**
+
+| rownum | name | price |
+| -----: | ---- | ----: |
+| 1	| Laptop | 1098.90 |
+| 2	| Monitor | 175.89 |
+| 3	| Tastatur | 39.49 |
 
 <details>
 <summary>Show solution</summary>
@@ -98,14 +106,6 @@ SELECT
   price
 FROM products;
 ```
-
-**Erwartetes Ergebnis**
-
-| rownum | name | price |
-| -----: | ---- | ----: |
-| 1	| Laptop | 1098.90 |
-| 2	| Monitor | 175.89 |
-| 3	| Tastatur | 39.49 |
 
 </p>
 </details>
@@ -125,6 +125,14 @@ Geben Sie aus:
 - Gesamtumsatz
 - Rang
 
+**Erwartetes Ergebnis**
+
+| name | total_revenue | revenue_rank |
+| ---- | ------------: | -----------: |
+| Laptop | 999.00 | 1 |
+| Monitor | 209.60 | 2 |
+| Tastatur | 59.80 | 3 |
+
 <details>
 <summary>Show solution</summary>
 <p>
@@ -141,14 +149,6 @@ JOIN order_items oi ON p.id = oi.product_id
 GROUP BY p.name;
 ```
 
-**Erwartetes Ergebnis**
-
-| name | total_revenue | revenue_rank |
-| ---- | ------------: | -----------: |
-| Laptop | 999.00 | 1 |
-| Monitor | 209.60 | 2 |
-| Tastatur | 59.80 | 3 |
-
 </p>
 </details>
 
@@ -160,6 +160,14 @@ Berechnen Sie in einer Abfrage:
 - Kategorie
 - Preis
 - Durchschnittspreis innerhalb der Kategorie (über Window, nicht über GROUP BY)
+
+**Erwartetes Ergebnis**
+
+| name | category | price | avg_in_category |
+| ---- | -------- | ----: | --------------: |
+| Tastatur | allgemein | 39.49 | 438.0933333333333333 |
+| Laptop | allgemein | 1098.90 | 438.0933333333333333 |
+| Monitor | allgemein | 175.89 | 438.0933333333333333 |
 
 Hinweis: Verwenden Sie `AVG(price) OVER (PARTITION BY category)`.
 
@@ -178,14 +186,6 @@ SELECT
 FROM products;
 ```
 
-**Erwartetes Ergebnis**
-
-| name | category | price | avg_in_category |
-| ---- | -------- | ----: | --------------: |
-| Tastatur | allgemein | 39.49 | 438.0933333333333333 |
-| Laptop | allgemein | 1098.90 | 438.0933333333333333 |
-| Monitor | allgemein | 175.89 | 438.0933333333333333 |
-
 </p>
 </details>
 
@@ -197,6 +197,13 @@ Erstellen Sie einen CTE, der für jedes Produkt den Gesamtumsatz berechnet:
 - Gesamter Umsatz: `SUM(quantity * price)`
 
 Geben Sie danach eine Abfrage aus, die nur Produkte mit einem Umsatz > 200 anzeigt.
+
+**Erwartetes Ergebnis**
+
+| id | name | total_revenue |
+| -: | ---- | ------------: |
+| 1 | Monitor | 209.60 |
+| 4 | Laptop | 999.00 |
 
 <details>
 <summary>Show solution</summary>
@@ -219,13 +226,6 @@ FROM product_totals
 WHERE total_revenue > 200;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | total_revenue |
-| -: | ---- | ------------: |
-| 1 | Monitor | 209.60 |
-| 4 | Laptop | 999.00 |
-
 </p>
 </details>
 
@@ -244,6 +244,13 @@ CTE 2: ranked_customers
 - Sortierung: Höchster Umsatz zuerst
 
 Geben Sie danach die Top 3 Kunden aus.
+
+**Erwartetes Ergebnis**
+
+| customer_id | name | total_revenue | revenue_rank |
+| ----------: | ---- | ------------: | -----------: |
+| 2 | Bob OHG | 1058.70 | 1 |
+| 1 | Alice GmbH | 209.70 | 2 |
 
 <details>
 <summary>Show solution</summary>
@@ -275,13 +282,6 @@ FROM ranked_customers
 WHERE revenue_rank <= 3;
 ```
 
-**Erwartetes Ergebnis**
-
-| customer_id | name | total_revenue | revenue_rank |
-| ----------: | ---- | ------------: | -----------: |
-| 2 | Bob OHG | 1058.70 | 1 |
-| 1 | Alice GmbH | 209.70 | 2 |
-
 </p>
 </details>
 
@@ -293,6 +293,12 @@ Erstellen Sie eine vollständige Analyse:
 2. Berechnen Sie in einem CTE den Gesamtumsatz dieser Produkte.
 3. Erstellen Sie eine Window-Function, die diese Produkte nach Umsatz rankt.
 4. Geben Sie die Top 5 aus.
+
+**Erwartetes Ergebnis**
+
+| id | name | category | total_revenue | revenue_rank |
+| -: | ---- | -------- | ------------: | -----------: |
+| 4 | Laptop | allgemein | 999.00 | 1 |
 
 <details>
 <summary>Show solution</summary>
@@ -335,12 +341,6 @@ SELECT *
 FROM ranked
 WHERE revenue_rank <= 5;
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | category | total_revenue | revenue_rank |
-| -: | ---- | -------- | ------------: | -----------: |
-| 4 | Laptop | allgemein | 999.00 | 1 |
 
 </p>
 </details>

@@ -29,6 +29,13 @@ Erstellen Sie eine Abfrage mit einem CTE, der:
 
 Geben Sie danach alle Kunden mit einem Umsatz über 200 € aus.
 
+**Erwartetes Ergebnis**
+
+| customer_id | customer_name | total_revenue |
+| ----------: | ------------- | ------------: |
+| 2 | Bob OHG | 1058.70 |
+| 1 | Alice GmbH | 209.70 |
+
 <details>
 <summary>Show solution</summary>
 <p>
@@ -51,13 +58,6 @@ FROM customer_totals
 WHERE total_revenue > 200;
 ```
 
-**Erwartetes Ergebnis**
-
-| customer_id | customer_name | total_revenue |
-| ----------: | ------------- | ------------: |
-| 2 | Bob OHG | 1058.70 |
-| 1 | Alice GmbH | 209.70 |
-
 </p>
 </details>
 
@@ -74,6 +74,14 @@ CTE 2: `ranked_products`
 - Vergibt ein Ranking über den Umsatz (höchster zuerst)
 
 Geben Sie das Ranking der Top 3 Produkte aus.
+
+**Erwartetes Ergebnis**
+
+| id | name | total_revenue | revenue_rank |
+| -: | ---- | ------------: | -----------: |
+| 8 | Laptop | 999.00 | 1 |
+| 5 | Monitor | 209.60 | 2 |
+| 6 | Tastatur | 59.80 | 3 |
 
 <details>
 <summary>Show solution</summary>
@@ -104,14 +112,6 @@ FROM ranked_products
 WHERE revenue_rank <= 3;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | total_revenue | revenue_rank |
-| -: | ---- | ------------: | -----------: |
-| 8 | Laptop | 999.00 | 1 |
-| 5 | Monitor | 209.60 | 2 |
-| 6 | Tastatur | 59.80 | 3 |
-
 </p>
 </details>
 
@@ -129,6 +129,13 @@ Erstellen Sie eine Abfrage, die:
 ausgibt
 
 Filtern Sie anschließend nur Bestellungen, deren Gesamtumsatz > 150 € ist.
+
+**Erwartetes Ergebnis**
+
+| order_id | customer | position_count | total_revenue |
+| -------: | -------- | -------------: | ------------: |
+| 1 | Alice GmbH | 2 | 209.70 |
+| 2 | Bob OHG | 2 | 1058.70 |
 
 <details>
 <summary>Show solution</summary>
@@ -149,13 +156,6 @@ GROUP BY o.id, c.name
 HAVING SUM(oi.quantity * oi.price) > 150;
 ```
 
-**Erwartetes Ergebnis**
-
-| order_id | customer | position_count | total_revenue |
-| -------: | -------- | -------------: | ------------: |
-| 1 | Alice GmbH | 2 | 209.70 |
-| 2 | Bob OHG | 2 | 1058.70 |
-
 </p>
 </details>
 
@@ -166,6 +166,12 @@ Erstellen Sie eine Abfrage, die:
 1. Zunächst in einem CTE alle Produkte auswählt, die über dem Durchschnittspreis ihrer Kategorie liegen
 2. Danach JOINs nutzt, um deren Gesamtumsatz zu berechnen
 3. Abschließend nur Produkte mit Umsatz > 200 € ausgibt
+
+**Erwartetes Ergebnis**
+
+| id | name | category | total_revenue |
+| -: | ---- | -------- | ------------: |
+| 8 | Laptop | allgemein | 999.00 |
 
 Hinweis: Nutzen Sie Window Functions in der Subquery oder in einem CTE.
 
@@ -206,12 +212,6 @@ WHERE total_revenue > 200
 ORDER BY total_revenue DESC;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | category | total_revenue |
-| -: | ---- | -------- | ------------: |
-| 8 | Laptop | allgemein | 999.00 |
-
 </p>
 </details>
 
@@ -232,6 +232,12 @@ Verwenden Sie:
 - Window Functions
 - Aggregation
 - HAVING
+
+**Erwartetes Ergebnis**
+
+| name | revenue |
+| ---- | ------: |
+| Bob OHG | 999.00 |
 
 <details>
 <summary>Show solution</summary>
@@ -271,12 +277,6 @@ JOIN customers c ON c.id = orv.customer_id
 WHERE orv.revenue > 300
 ORDER BY orv.revenue DESC;
 ```
-
-**Erwartetes Ergebnis**
-
-| name | revenue |
-| ---- | ------: |
-| Bob OHG | 999.00 |
 
 </p>
 </details>

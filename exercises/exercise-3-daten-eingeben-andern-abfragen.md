@@ -119,15 +119,6 @@ Erstellen Sie die folgenden SELECT-Abfragen:
 SELECT * FROM products;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 35,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 3 | Maus | 19,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
-
 ### 2. Sortiert nach Preis
 
 **SQL-Abfrage**
@@ -138,15 +129,6 @@ FROM products
 ORDER BY price DESC;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
-| 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 35,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 3 | Maus | 19,90 | 2025-11-28 18:16:31.480651 | allgemein |
-
 ### 3. Produkte > 100 €
 
 **SQL-Abfrage**
@@ -156,13 +138,6 @@ SELECT *
 FROM products
 WHERE price > 100;
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
 
 ### 4. Nur bestimmte Spalten mit Alias
 
@@ -175,15 +150,6 @@ SELECT
 FROM products;
 ```
 
-**Erwartetes Ergebnis**
-
-| produktname | preis_eur |
-| ----------- | --------: |
-| Monitor | 149,90 |
-| Tastatur | 35,90 |
-| Maus | 19,90 |
-| Laptop | 999,00 |
-
 ### 5. Kunden aus Berlin
 
 **SQL-Abfrage**
@@ -193,12 +159,6 @@ SELECT *
 FROM customers
 WHERE city = 'Berlin';
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | city | created_at |
-| -- | ---- | ---- | ---------- |
-| 1 | Alice GmbH | Berlin | 2025-11-28 19:07:54.266568 |
 
 </p>
 </details>
@@ -247,15 +207,6 @@ WHERE name = 'Monitor';
 SELECT * FROM products;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 1 | Monitor | 149,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 35,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 3 | Maus | 159,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 4 | Laptop | 999,00 | 2025-11-28 18:16:31.480651 | allgemein |
-
 **2. Alle Preise um 10% erhöhen**
 
 **SQL-Abfrage**
@@ -266,15 +217,6 @@ SET price = price * 1.10;
 
 SELECT * FROM products;
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
-| 3 | Maus | 21,89 | 2025-11-28 18:16:31.480651 | allgemein |
-| 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
 
 </p>
 </details>
@@ -320,14 +262,6 @@ WHERE name = 'Maus';
 SELECT * FROM products;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
-| 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
-
 **2. Alle Produkte unter 30 € entfernen**
 
 **SQL-Abfrage**
@@ -338,14 +272,6 @@ WHERE price < 35;
 
 SELECT * FROM products;
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 1 | Monitor | 175,89 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
-| 4 | Laptop | 1098,90 | 2025-11-28 18:16:31.480651 | allgemein |
 
 </p>
 </details>
@@ -376,13 +302,6 @@ WHERE name LIKE 'T%'
    OR price < 50
 ORDER BY name;
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 3 | Maus | 19,90 | 2025-11-28 18:16:31.480651 | allgemein |
-| 2 | Tastatur | 39,49 | 2025-11-28 18:16:31.480651 | allgemein |
 
 </p>
 </details>

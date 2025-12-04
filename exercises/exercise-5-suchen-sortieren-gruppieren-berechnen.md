@@ -60,14 +60,6 @@ FROM products
 ORDER BY name ASC;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 | allgemein |
-| 1	| Monitor |	175.89	| 2025-11-28 18:16:31.480651 | allgemein |
-| 2	| Tastatur |	35.49	| 2025-11-28 18:16:31.480651 | allgemein |
-
 ### 2. Nach Preis absteigend
 
 **SQL-Abfrage**
@@ -78,14 +70,6 @@ FROM products
 ORDER BY price DESC;
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 | allgemein |
-| 1	| Monitor |	175.89	| 2025-11-28 18:16:31.480651 | allgemein |
-| 2	| Tastatur |	35.49	| 2025-11-28 18:16:31.480651 | allgemein |
-
 ### 3. Zuerst nach category, dann nach price (absteigend)
 
 **SQL-Abfrage**
@@ -95,14 +79,6 @@ SELECT *
 FROM products
 ORDER BY category ASC, price DESC;
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at | category |
-| -- | ---- | ----: | ---------- | -------- |
-| 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 | allgemein |
-| 1	| Monitor |	175.89	| 2025-11-28 18:16:31.480651 | allgemein |
-| 2	| Tastatur |	39.49	| 2025-11-28 18:16:31.480651 | allgemein |
 
 </p>
 </details>
@@ -149,12 +125,6 @@ FROM products
 WHERE name LIKE 'M%';
 ```
 
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at |
-| -- | ---- | ----: | ---------- |
-| 1	| Monitor |	175.49	| 2025-11-28 18:16:31.480651 |
-
 ### 2. Name enthält 'top'
 
 **SQL-Abfrage**
@@ -164,12 +134,6 @@ SELECT *
 FROM products
 WHERE name LIKE '%top%';
 ```
-
-**Erwartetes Ergebnis**
-
-| id | name | price | created_at |
-| -- | ---- | ----: | ---------- |
-| 4	| Laptop |	1098.90	| 2025-11-28 18:16:31.480651 |
 
 ### 3. Name enthält 'monitor' (case-insensitive)
 
@@ -195,9 +159,36 @@ WHERE name ILIKE '%monitor%';
 Nutzen Sie die Tabelle order_items, um Kennzahlen zu berechnen:
 
 1. Ermitteln Sie die Anzahl aller Bestellpositionen.
+
+    **Erwartetes Ergebnis**
+
+    | position_count |
+    | -------------: |
+    | 4 |
+  
 2. Ermitteln Sie die Gesamtmenge (SUM der quantity) aller Positionen.
+
+    **Erwartetes Ergebnis**
+
+    | total_quantity |
+    | -------------: |
+    | 7 |
+  
 3. Ermitteln Sie den Gesamtumsatz über alle Bestellpositionen (Hinweis: quantity * price).
+
+    **Erwartetes Ergebnis**
+
+    | total_revenue |
+    | -------------: |
+    | 1268.40 |
+  
 4. Ermitteln Sie den höchsten Einzelpreis (MAX(price)) und den niedrigsten Einzelpreis (MIN(price)).
+
+      **Erwartetes Ergebnis**
+
+    | max_price | min_price |
+    | --------: | --------: |
+    | 999.00 | 19.90 |
 
 <details>
 <summary>Show solution</summary>
@@ -212,12 +203,6 @@ SELECT COUNT(*) AS position_count
 FROM order_items;
 ```
 
-**Erwartetes Ergebnis**
-
-| position_count |
-| -------------: |
-| 4 |
-
 ### 2. Gesamtmenge
 
 **SQL-Abfrage**
@@ -227,12 +212,6 @@ SELECT SUM(quantity) AS total_quantity
 FROM order_items;
 ```
 
-**Erwartetes Ergebnis**
-
-| total_quantity |
-| -------------: |
-| 7 |
-
 ### 3. Gesamtumsatz
 
 **SQL-Abfrage**
@@ -241,12 +220,6 @@ FROM order_items;
 SELECT SUM(quantity * price) AS total_revenue
 FROM order_items;
 ```
-
-**Erwartetes Ergebnis**
-
-| total_revenue |
-| -------------: |
-| 1268.40 |
 
 ### 4. Höchster und niedrigster Einzelpreis
 
@@ -259,12 +232,6 @@ SELECT
 FROM order_items;
 ```
 
-**Erwartetes Ergebnis**
-
-| max_price | min_price |
-| --------: | --------: |
-| 999.00 | 19.90 |
-
 </p>
 </details>
 
@@ -276,9 +243,29 @@ Erstellen Sie Auswertungen für die Tabelle products bzw. order_items:
     - Kategorie
     - Anzahl der Produkte je Kategorie (COUNT(*))
 
+    **Erwartetes Ergebnis**
+
+    | category | product_count |
+    | --------- | -----------: |
+    | allgemein | 3 |
+
 2. Ermitteln Sie pro Kategorie den durchschnittlichen Produktpreis (AVG(price)).
 
+    **Erwartetes Ergebnis**
+
+    | category | avg_price |
+    | --------- | -------: |
+    | allgemein | 438.09 |
+
 3. Ermitteln Sie pro Produkt (über order_items) den Gesamtumsatz und geben Sie Produkt-ID und Gesamtumsatz aus.
+
+    **Erwartetes Ergebnis**
+
+    | product_id | total_revenue |
+    | ---------: | ------------: |
+    | 1 | 209.60 |
+    | 2 | 59.80 |
+    | 4 | 999.00 |
 
 <details>
 <summary>Show solution</summary>
@@ -296,12 +283,6 @@ FROM products
 GROUP BY category;
 ```
 
-**Erwartetes Ergebnis**
-
-| category | product_count |
-| --------- | -----------: |
-| allgemein | 3 |
-
 ### 2. Durchschnittspreis je Kategorie
 
 **SQL-Abfrage**
@@ -313,12 +294,6 @@ SELECT
 FROM products
 GROUP BY category;
 ```
-
-**Erwartetes Ergebnis**
-
-| category | avg_price |
-| --------- | -------: |
-| allgemein | 438.09 |
 
 ### 3. Gesamtumsatz je Produkt (über order_items)
 
@@ -332,14 +307,6 @@ FROM order_items
 GROUP BY product_id;
 ```
 
-**Erwartetes Ergebnis**
-
-| product_id | total_revenue |
-| ---------: | ------------: |
-| 1 | 209.60 |
-| 2 | 59.80 |
-| 4 | 999.00 |
-
 </p>
 </details>
 
@@ -348,7 +315,21 @@ GROUP BY product_id;
 Auf Basis der vorherigen Gruppierungen:
 
 1. Zeigen Sie nur Kategorien, in denen es mehr als 1 Produkt gibt.
+
+    **Erwartetes Ergebnis**
+
+    | category | product_count |
+    | -------- | ------------: |
+    | allgemein | 3 |
+  
 2. Zeigen Sie nur Produkte (über order_items), deren Gesamtumsatz größer als 200 ist.
+
+    **Erwartetes Ergebnis**
+
+    | product_id | total_revenue |
+    | ---------: | ------------: |
+    | 1 | 209.60 |
+    | 3 | 999.00 |
 
 Verwenden Sie hierfür GROUP BY in Kombination mit HAVING.
 
@@ -369,12 +350,6 @@ GROUP BY category
 HAVING COUNT(*) > 1;
 ```
 
-**Erwartetes Ergebnis**
-
-| category | product_count |
-| -------- | ------------: |
-| allgemein | 3 |
-
 ### 2. Nur Produkte mit Gesamtumsatz > 200
 
 **SQL-Abfrage**
@@ -388,13 +363,6 @@ GROUP BY product_id
 HAVING SUM(quantity * price) > 200;
 ```
 
-**Erwartetes Ergebnis**
-
-| product_id | total_revenue |
-| ---------: | ------------: |
-| 1 | 209.60 |
-| 3 | 999.00 |
-
 </p>
 </details>
 
@@ -407,6 +375,12 @@ Hinweise:
 - JOIN products mit order_items über product_id
 - Gruppierung nach category
 - Aggregat SUM(quantity * price)
+
+**Erwartetes Ergebnis**
+
+| category | total_revenue |
+| -------- | ------------: |
+| allgemein | 1268.40 |
 
 <details>
 <summary>Show solution</summary>
@@ -424,12 +398,6 @@ JOIN order_items oi
 GROUP BY p.category
 ORDER BY total_revenue DESC;
 ```
-
-**Erwartetes Ergebnis**
-
-| category | total_revenue |
-| -------- | ------------: |
-| allgemein | 1268.40 |
 
 </p>
 </details>
