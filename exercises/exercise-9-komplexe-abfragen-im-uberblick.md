@@ -1,13 +1,13 @@
-- [8. Komplexe Abfragen im Überblick](#8-komplexe-abfragen-im-überblick)
-  - [8.1 Komplexe Abfrage – Umsatz pro Kunde (CTE + JOIN + GROUP BY)](#81-komplexe-abfrage--umsatz-pro-kunde-cte--join--group-by)
-  - [8.2 Kombination aus mehreren CTEs (mehrstufig)](#82-kombination-aus-mehreren-ctes-mehrstufig)
-  - [8.3 Komplexe Abfrage mit mehreren Joins und mehreren Filtern](#83-komplexe-abfrage-mit-mehreren-joins-und-mehreren-filtern)
-  - [8.4 Komplexe Abfrage mit Subquery UND CTE](#84-komplexe-abfrage-mit-subquery-und-cte)
-  - [8.5 Bonusaufgabe: Sehr komplexe Abfrage (kombiniert alles)](#85-bonusaufgabe-sehr-komplexe-abfrage-kombiniert-alles)
+- [9. Komplexe Abfragen im Überblick](#9-komplexe-abfragen-im-überblick)
+  - [9.1 Komplexe Abfrage – Umsatz pro Kunde (CTE + JOIN + GROUP BY)](#91-komplexe-abfrage--umsatz-pro-kunde-cte--join--group-by)
+  - [9.2 Kombination aus mehreren CTEs (mehrstufig)](#92-kombination-aus-mehreren-ctes-mehrstufig)
+  - [9.3 Komplexe Abfrage mit mehreren Joins und mehreren Filtern](#93-komplexe-abfrage-mit-mehreren-joins-und-mehreren-filtern)
+  - [9.4 Komplexe Abfrage mit Subquery UND CTE](#94-komplexe-abfrage-mit-subquery-und-cte)
+  - [9.5 Bonusaufgabe: Sehr komplexe Abfrage (kombiniert alles)](#95-bonusaufgabe-sehr-komplexe-abfrage-kombiniert-alles)
 
 Bearbeitungszeit: 60 Minuten
 
-# 8. Komplexe Abfragen im Überblick
+# 9. Komplexe Abfragen im Überblick
 
 In diesem Aufgabenblatt kombinieren Sie verschiedene SQL-Bausteine wie CTEs, Joins, Aggregationen und Filter.
 Zusätzlich lernen Sie Performance-Grundlagen wie Indexes und die Analyse von Abfragen mit EXPLAIN kennen.
@@ -19,7 +19,7 @@ Die Aufgaben basieren auf den Tabellen:
 - orders
 - order_items
 
-## 8.1 Komplexe Abfrage – Umsatz pro Kunde (CTE + JOIN + GROUP BY)
+## 9.1 Komplexe Abfrage – Umsatz pro Kunde (CTE + JOIN + GROUP BY)
 
 Erstellen Sie eine Abfrage mit einem CTE, der:
 
@@ -61,7 +61,7 @@ WHERE total_revenue > 200;
 </p>
 </details>
 
-## 8.2 Kombination aus mehreren CTEs (mehrstufig)
+## 9.2 Kombination aus mehreren CTEs (mehrstufig)
 
 Erstellen Sie eine mehrstufige CTE-Kette:
 
@@ -115,7 +115,7 @@ WHERE revenue_rank <= 3;
 </p>
 </details>
 
-## 8.3 Komplexe Abfrage mit mehreren Joins und mehreren Filtern
+## 9.3 Komplexe Abfrage mit mehreren Joins und mehreren Filtern
 
 Erstellen Sie eine Abfrage, die:
 
@@ -159,7 +159,7 @@ HAVING SUM(oi.quantity * oi.price) > 150;
 </p>
 </details>
 
-## 8.4 Komplexe Abfrage mit Subquery UND CTE
+## 9.4 Komplexe Abfrage mit Subquery UND CTE
 
 Erstellen Sie eine Abfrage, die:
 
@@ -215,7 +215,7 @@ ORDER BY total_revenue DESC;
 </p>
 </details>
 
-## 8.5 Bonusaufgabe: Sehr komplexe Abfrage (kombiniert alles)
+## 9.5 Bonusaufgabe: Sehr komplexe Abfrage (kombiniert alles)
 
 Erstellen Sie eine Abfrage, die:
 
