@@ -17,8 +17,9 @@ Die Aufgabenblätter befinden sich im Ordner `exercises`:
 4. [Exercise 4 – Arbeiten mit mehreren Tabellen](./exercises/exercise-4-arbeiten-mit-mehreren-tabellen.md)  
 5. [Exercise 5 – Suchen, sortieren, gruppieren, berechnen](./exercises/exercise-5-suchen-sortieren-gruppieren-berechnen.md)  
 6. [Exercise 6 – Umgang mit Datentypen](./exercises/exercise-6-umgang-mit-datentypen.md)  
-7. [Exercise 7 – Erweiterte Auswertungen](./exercises/exercise-7-erweiterte-auswertungen.md)  
-8. [Exercise 8 – Komplexe Abfragen im Überblick](./exercises/exercise-8-komplexe-abfragen-im-uberblick.md)
+7. [Exercise 7 – Erweiterte Auswertungen (Subqueries, Window Functions)](./exercises/exercise-7-erweiterte-auswertungen.md)
+8. [Exercise 8 – Erweiterte Auswertungen (Common Table Expressions)](./exercises/exercise-8-erweiterte-auswertungen-ctes.md)  
+9. [Exercise 9 – Komplexe Abfragen im Überblick](./exercises/exercise-9-komplexe-abfragen-im-uberblick.md)
 
 Alle Aufgabenblätter enthalten direkt die Lösungen im Abschnitt **„Show solution“** – inklusive SQL-Abfragen und optionalen Ergebnistabellen.
 
@@ -73,7 +74,8 @@ Für die Übungen benötigst du:
 │   ├── exercise-5-suchen-sortieren-gruppieren-berechnen.md
 │   ├── exercise-6-umgang-mit-datentypen.md
 │   ├── exercise-7-erweiterte-auswertungen.md
-│   └── exercise-8-komplexe-abfragen-im-uberblick.md
+│   ├── exercise-8-erweiterte-auswertungen-ctes.md
+│   └── exercise-9-komplexe-abfragen-im-uberblick.md
 ├── slides/
 │   └── postgresql-schulung.pdf
 └── assets/

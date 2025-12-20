@@ -9,7 +9,7 @@ Bearbeitungszeit: 60 Minuten
 
 # 7. Erweiterte Auswertungen
 
-In dieser Aufgabe vertiefen Sie komplexere SQL-Auswertungen mit Subqueries, Window Functions und CTEs (WITH-Klausel).
+In dieser Aufgabe vertiefen Sie komplexere SQL-Auswertungen mit Subqueries und Window Functions.
 
 Verwenden Sie dafür die Tabellen products, customers, orders und order_items.
 
